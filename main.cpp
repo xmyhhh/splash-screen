@@ -95,8 +95,8 @@ DWORD WINAPI SplashScreenThread(LPVOID lpParam)
 int main()
 {
     // 启动 Splash Screen 线程
-    HANDLE hSplashThread = CreateThread(nullptr, 0, SplashScreenThread, nullptr, 0, nullptr);
-    if (!hSplashThread)
+    HANDLE s_splash_thread = CreateThread(nullptr, 0, SplashScreenThread, nullptr, 0, nullptr);
+    if (!s_splash_thread)
         return -1;
 
     // 主线程模拟加载过程（例如 5 秒内加载完成）
@@ -113,8 +113,8 @@ int main()
         PostMessage(g_hSplashWnd, WM_CLOSE, 0, 0);
 
     // 等待 Splash 线程结束
-    WaitForSingleObject(hSplashThread, INFINITE);
-    CloseHandle(hSplashThread);
+    WaitForSingleObject(s_splash_thread, INFINITE);
+    CloseHandle(s_splash_thread);
 
     // 初始化 GLFW 创建主应用窗口
     if (!glfwInit())
